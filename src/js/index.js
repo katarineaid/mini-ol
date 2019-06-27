@@ -20,6 +20,14 @@ class Electronica extends AbstractMap {
     return self;
   }
 
+  setStyle(style, type) {
+    let self = this;
+    const dict = {
+      "uniform": self.layers.setUniformStyle,
+    };
+    let appliedStyle = dict[type];
+    appliedStyle(style);
+  }
 }
 
 module.exports = Electronica;

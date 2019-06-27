@@ -49,11 +49,81 @@
   init();
 
   async function init() {
-    let data = await loadData("http://localhost:9001/api/v1/source/read");
+    // let data = await loadData("http://localhost:9001/api/v1/source/read");
     electronica = new gisApi();
+    let data = {
+      "type": "FeatureCollection",
+      "crs": {
+        "type": "name",
+        "properties": {
+          "name": "EPSG:3857"
+        }
+      },
+      "metadata": {
+        "idField": "OBJECTID",
+        "geometryType": "Polygon",
+        "fields": [
+          {
+            "name": "OBJECTID",
+            "alias": "OBJECTID",
+            "type": "esriFieldTypeOID"
+          }
+        ]
+      },
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              3379290.575116178,
+              8396650.552955022
+            ]
+          },
+          "properties": {
+            "textLabel": "ул. Кантемировская, д. 39, А"
+          }
+        }
+      ]
+    }
+    currentLayer = electronica.initScheme({ data: { data } });
 
-    currentLayer = electronica.initScheme({ data: data });
-
+    electronica.setStyle(
+      {
+        stroke: {
+          color: "#000",
+          width: 1
+        },
+        icon: {
+          src: "placeholder.png",
+          crossOrigin: "anonymous",
+          scale:1,
+          img: undefined,
+          imgSize: undefined
+        },
+        label: {
+          field: "textLabel",
+          offsetX: 12,
+          offsetY: 0,
+          rotateWithView: false,
+          textAlign: 'left',
+          font: 28,
+          stroke: {
+            color: "#000",
+            width: 1
+          },
+          fill: {
+            color: "#000"
+          },
+          backgroundFill: {
+            color: "#fff"
+          },
+          scale:2,
+          minResolution: 0,
+          maxResolution: 20
+        }
+      }, 'uniform'
+    )
   }
 
   function bindClick(elementName, func) {

@@ -1,6 +1,7 @@
 let GeoJSON = require('ol/format').GeoJSON;
 let VectorLayer = require('ol/layer').Vector;
 let VectorSource = require('ol/source').Vector;
+let uniform = require('../Styles/uniform');
 
 const getFeaturesExtent = require('../Utils/featuresExtent');
 const setExtent = require('../Utils/setExtent');
@@ -9,6 +10,7 @@ class Layers {
   constructor(params) {
     this.electronica = params.electronica;
     this.initScheme(params);
+    this.setUniformStyle = this.setUniformStyle.bind(this);
   }
 
   initScheme(params) {
@@ -51,6 +53,13 @@ class Layers {
 
     electronica.addLayer(vector);
     return self;
+  }
+
+  setUniformStyle(params) {
+    let self = this;
+    let scheme = self.SchemeLayer;
+    let style = new uniform(params);
+    scheme.setStyle(style.getStyle());
   }
 }
 
