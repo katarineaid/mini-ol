@@ -8,6 +8,8 @@ let http = require('http').Server(app);
 let address = 'localhost';
 let port = 7500;
 
+const writeData = require("./router/index");
+
 runServer();
 
 function runServer() {
@@ -17,6 +19,7 @@ function runServer() {
   app.get('/', function(req, res, next) {
     res.sendFile(path.join(__dirname + '/../src/html/index.html'));
   });
+  app.post('/view', (writeData));
 
   http.listen(port, function() {
     console.log('+------------------------------------------------------------+');
