@@ -34,9 +34,9 @@
   init();
 
   async function init() {
-    let data = await loadData("http://localhost:7500/data");
+    let data = await loadData("http://localhost:7500/data.json");
     electronica = new gisApi();
-    currentLayer = electronica.initScheme({ data: { data } });
+    currentLayer = electronica.initScheme({ data });
   }
 
   async function loadData(url) {

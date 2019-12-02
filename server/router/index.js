@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 
 module.exports = async (req, res, next) => {
   const geojson = req.body.geojson;
@@ -17,7 +18,7 @@ module.exports = async (req, res, next) => {
     return res.json(isWrite);
   }
 
-  return res.sendFile(path.join(__dirname + '/../src/html/index.html'));
+  return res.sendFile(path.join(__dirname + '/../../src/html/index.html'));
 };
 
 const writeFile = (filePath, fileData) => new Promise((fulfill, reject) => {
